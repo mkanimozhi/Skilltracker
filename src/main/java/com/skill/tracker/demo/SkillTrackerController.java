@@ -53,7 +53,7 @@ public class SkillTrackerController {
 
 	@PostMapping(path="/api/v1/engineer/add-profile")
 	public ProfileResponse addProfiles(@RequestBody Profile profile) {
-
+		System.out.println("Inside addProfiles... "+profile);
 		ProfileResponse response = new ProfileResponse();
 		if(validateProfileRequest(profile, response)) {
 			List<Profile> allProfiles = profileRepo.findAll();

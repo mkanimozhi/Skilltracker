@@ -1,0 +1,25 @@
+{
+	"name": "sharma",
+	"associateId": "CTS002",
+	"mobile": "9488896950",
+	"email": "sharma.M3@cognizant.com",
+	"technicalSkills": 
+	{
+		"html_Css_Javascript": "1",
+	"angular": "",
+	"react": "",
+		"spring": "",
+	"restful": "",
+	"hibernate": "",
+		"git": "",
+	"docker": "",
+	"jenkins": "",
+		"aws": ""
+	},
+	"nonTechnicalSkills": {
+	"spoken": "",
+	"communication": "",
+	"aptitude": ""	
+	}
+	
+}
