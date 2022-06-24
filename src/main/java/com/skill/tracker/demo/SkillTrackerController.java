@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skill.tracker.model.Message;
@@ -75,7 +76,8 @@ public class SkillTrackerController  {
 	@Order(0)
 	SecurityFilterChain resources(HttpSecurity http) throws Exception {
 	    http
-	        .requestMatchers((matchers) -> matchers.antMatchers("/engineer/**"))
+//	        .requestMatchers((matchers) -> matchers.antMatchers("/engineer/**"))
+	        .requestMatchers((matchers) -> matchers.antMatchers("/**"))
 	        .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
 	        .requestCache().disable()
 	        .securityContext().disable()
@@ -90,6 +92,19 @@ public class SkillTrackerController  {
 		List<Profile> allProfiles = profileRepo.findAll();
 		sortSkills(allProfiles);
 		return allProfiles;
+	}
+	
+	@GetMapping(path="/api/v1/engineer/get-profile-detail")
+	public Profile getProfiles(@RequestParam int id) {
+		System.out.println("Called getProfiles detail method="+id);
+		Profile profile = null;
+		Optional<Profile> profileFindById = profileRepo.findById(id);
+		if(profileFindById.isPresent()) {
+			profile = profileFindById.get();
+			sortTechnicalSkill(profile);
+			sortNonTechnicalSkill(profile);
+		}
+		return profile;
 	}
 
 	@PostMapping(path="/api/v1/engineer/add-profile")
@@ -142,7 +157,7 @@ public class SkillTrackerController  {
 
 	@PostMapping(path="/api/v1/engineer/edit-profile")
 	public ProfileResponse editProfiles(@RequestBody Profile profile) {
-		System.out.println("Inside addProfiles... "+profile);
+		System.out.println("Inside editProfiles... "+profile);
 		ProfileResponse response = new ProfileResponse();
 		if(validateProfileRequest(profile, response)) {
 			Optional<Profile> profileFound = profileRepo.findById(profile.getId());
@@ -226,33 +241,42 @@ public class SkillTrackerController  {
 	private void sortSkills(List<Profile> allProfiles) {
 		if(allProfiles != null && !allProfiles.isEmpty()) {
 			for (Profile eachProfile : allProfiles) {
-				TechnicalSkill tskill = eachProfile.getTechnicalSkills();
-				TechnicalSkills[] techSkillArr = new TechnicalSkills[10];
-				if(tskill != null) {
-					techSkillArr[0] = new TechnicalSkills("html_Css_Javascript", tskill.getHtml_Css_Javascript());
-					techSkillArr[1] = new TechnicalSkills("angular", tskill.getAngular());
-					techSkillArr[2] = new TechnicalSkills("react", tskill.getReact());
-					techSkillArr[3] = new TechnicalSkills("spring", tskill.getSpring());
-					techSkillArr[4] = new TechnicalSkills("restful", tskill.getRestful());
-					techSkillArr[5] = new TechnicalSkills("hibernate", tskill.getHibernate());
-					techSkillArr[6] = new TechnicalSkills("git", tskill.getGit());
-					techSkillArr[7] = new TechnicalSkills("docker", tskill.getDocker());
-					techSkillArr[8] = new TechnicalSkills("jenkins", tskill.getJenkins());
-					techSkillArr[9] = new TechnicalSkills("aws", tskill.getAws());
-				}
-				Arrays.sort(techSkillArr);
-				eachProfile.setTechnicalSkill(techSkillArr);
-				NonTechnicalSkill ntskill = eachProfile.getNonTechnicalSkills();
-				NonTechnicalSkills[] ntechSkillArr = new NonTechnicalSkills[3];
-				if(tskill != null) {
-					ntechSkillArr[0] = new NonTechnicalSkills("spoken", ntskill.getSpoken());
-					ntechSkillArr[1] = new NonTechnicalSkills("communication", ntskill.getCommunication());
-					ntechSkillArr[2] = new NonTechnicalSkills("aptitude", ntskill.getAptitude());
-				}
-				Arrays.sort(ntechSkillArr);
-				eachProfile.setNonTechnicalSkill(ntechSkillArr);
+				sortTechnicalSkill(eachProfile);
+				sortNonTechnicalSkill(eachProfile);
 			}
 		}
+	}
+
+	private void sortNonTechnicalSkill(Profile eachProfile) {
+		NonTechnicalSkill ntskill = eachProfile.getNonTechnicalSkills();
+		NonTechnicalSkills[] ntechSkillArr = new NonTechnicalSkills[3];
+		if(ntskill != null) {
+			ntechSkillArr[0] = new NonTechnicalSkills("spoken", ntskill.getSpoken());
+			ntechSkillArr[1] = new NonTechnicalSkills("communication", ntskill.getCommunication());
+			ntechSkillArr[2] = new NonTechnicalSkills("aptitude", ntskill.getAptitude());
+		}
+		Arrays.sort(ntechSkillArr);
+		eachProfile.setNonTechnicalSkill(ntechSkillArr);
+	}
+
+	private TechnicalSkill sortTechnicalSkill(Profile eachProfile) {
+		TechnicalSkill tskill = eachProfile.getTechnicalSkills();
+		TechnicalSkills[] techSkillArr = new TechnicalSkills[10];
+		if(tskill != null) {
+			techSkillArr[0] = new TechnicalSkills("html_Css_Javascript", tskill.getHtml_Css_Javascript());
+			techSkillArr[1] = new TechnicalSkills("angular", tskill.getAngular());
+			techSkillArr[2] = new TechnicalSkills("react", tskill.getReact());
+			techSkillArr[3] = new TechnicalSkills("spring", tskill.getSpring());
+			techSkillArr[4] = new TechnicalSkills("restful", tskill.getRestful());
+			techSkillArr[5] = new TechnicalSkills("hibernate", tskill.getHibernate());
+			techSkillArr[6] = new TechnicalSkills("git", tskill.getGit());
+			techSkillArr[7] = new TechnicalSkills("docker", tskill.getDocker());
+			techSkillArr[8] = new TechnicalSkills("jenkins", tskill.getJenkins());
+			techSkillArr[9] = new TechnicalSkills("aws", tskill.getAws());
+		}
+		Arrays.sort(techSkillArr);
+		eachProfile.setTechnicalSkill(techSkillArr);
+		return tskill;
 	}
 
 	private boolean validateFindProfileRequest(Profile request, ProfileResponse response) {
