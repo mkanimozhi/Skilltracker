@@ -33,21 +33,9 @@ public class TechnicalSkills implements Comparable<TechnicalSkills> {
 
 	@Override
 	public int compareTo(TechnicalSkills technicalSkills) {
-		// TODO Auto-generated method stub
-//		return 0;
 		int compareExpertiseLevel = ((TechnicalSkills) technicalSkills).getExpertiseLevel();
-		
-		//ascending order
-//		return this.expertiseLevel - compareExpertiseLevel;
-		
 		//descending order
 		return compareExpertiseLevel - this.expertiseLevel;
 	}
-
-	@Override
-	public String toString() {
-		return "TechnicalSkills [skillName=" + skillName + ", expertiseLevel=" + expertiseLevel + "]";
-	}
-	
 
 }

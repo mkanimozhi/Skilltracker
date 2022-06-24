@@ -110,13 +110,4 @@ public class Profile implements Serializable {
 		this.nonTechnicalSkill = nonTechnicalSkill;
 	}
 
-	@Override
-	public String toString() {
-		return "Profile [id=" + id + ", name=" + name + ", associateId=" + associateId + ", mobile=" + mobile
-				+ ", email=" + email + ", technicalSkills=" + technicalSkills + ", nonTechnicalSkills="
-				+ nonTechnicalSkills + ", createdTimestamp=" + createdTimestamp + ", updatedTimestamp="
-				+ updatedTimestamp + "]";
-	}
-
-
 }

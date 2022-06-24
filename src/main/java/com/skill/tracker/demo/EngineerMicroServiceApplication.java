@@ -8,7 +8,7 @@ public class EngineerMicroServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EngineerMicroServiceApplication.class, args);
-		System.out.println("EngineerMicroServiceApplication ...");
+		System.out.println("EngineerMicroServiceApplication API started...");
 	}
 
 }

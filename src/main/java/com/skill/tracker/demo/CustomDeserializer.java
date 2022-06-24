@@ -22,9 +22,7 @@ public class CustomDeserializer<T extends Serializable> implements Deserializer<
 	@SuppressWarnings("unchecked")
 	@Override
 	public T deserialize(String topic, byte[] objectData) {
-
 		return (objectData == null) ? null : (T) SerializationUtils.deserialize(objectData);
-
 	}
 
 	@Override

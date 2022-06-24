@@ -26,13 +26,7 @@ public class NonTechnicalSkills implements Comparable<NonTechnicalSkills> {
 	}
 	@Override
 	public int compareTo(NonTechnicalSkills nonTechnicalSkills) {
-		// TODO Auto-generated method stub
-//		return 0;
 		int compareExpertiseLevel = ((NonTechnicalSkills) nonTechnicalSkills).getExpertiseLevel();
-		
-		//ascending order
-//		return this.expertiseLevel - compareExpertiseLevel;
-		
 		//descending order
 		return compareExpertiseLevel - this.expertiseLevel;
 	}

@@ -15,12 +15,9 @@ public class CustomSerializer<T extends Serializable> implements Serializer<T> {
 
 	}
 
-
 	@Override
 	public byte[] serialize(String topic, T data) {
-
 		return SerializationUtils.serialize(data);
-
 	}
 
 	@Override
