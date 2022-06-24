@@ -18,8 +18,14 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,12 +44,13 @@ import com.skill.tracker.model.TechnicalSkill;
 import com.skill.tracker.model.TechnicalSkills;
 import com.skill.tracker.model.TransactionNotification;
 
+@EnableWebSecurity
 @RestController
 @RequestMapping(path="/skill-tracker")
 @CrossOrigin
 @EnableMongoRepositories
-public class SkillTrackerController {
-
+public class SkillTrackerController  {
+	
 	@Value("${spring.data.mongodb.database}")
 	private String mongodb;
 
@@ -63,7 +70,20 @@ public class SkillTrackerController {
 		kafkaConsumerAdd = ConsumerCreator.createConsumerReqList();
 		kafkaConsumerFind = ConsumerCreator.createConsumerReqListFind();
 	}
+	
+	@Bean 
+	@Order(0)
+	SecurityFilterChain resources(HttpSecurity http) throws Exception {
+	    http
+	        .requestMatchers((matchers) -> matchers.antMatchers("/engineer/**"))
+	        .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
+	        .requestCache().disable()
+	        .securityContext().disable()
+	        .sessionManagement().disable();
 
+	    return http.build();
+	}
+	
 	@GetMapping(path="/api/v1/engineer/get-profile")
 	public List<Profile> getProfiles() {
 		System.out.println("Called getProfiles method");
