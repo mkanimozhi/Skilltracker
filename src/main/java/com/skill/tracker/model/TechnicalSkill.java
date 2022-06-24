@@ -1,74 +1,81 @@
 package com.skill.tracker.model;
 
-public class TechnicalSkill {
-	private String html_Css_Javascript;
-	private String angular;
-	private String react;
-	private String spring;
-	private String restful;
-	private String hibernate;
-	private String git;
-	private String docker;
-	private String jenkins;
-	private String aws;
-	public String getHtml_Css_Javascript() {
+import java.io.Serializable;
+
+public class TechnicalSkill implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int html_Css_Javascript;
+	private int angular;
+	private int react;
+	private int spring;
+	private int restful;
+	private int hibernate;
+	private int git;
+	private int docker;
+	private int jenkins;
+	private int aws;
+	
+	public int getHtml_Css_Javascript() {
 		return html_Css_Javascript;
 	}
-	public void setHtml_Css_Javascript(String html_Css_Javascript) {
+	public void setHtml_Css_Javascript(int html_Css_Javascript) {
 		this.html_Css_Javascript = html_Css_Javascript;
 	}
-	public String getAngular() {
+	public int getAngular() {
 		return angular;
 	}
-	public void setAngular(String angular) {
+	public void setAngular(int angular) {
 		this.angular = angular;
 	}
-	public String getReact() {
+	public int getReact() {
 		return react;
 	}
-	public void setReact(String react) {
+	public void setReact(int react) {
 		this.react = react;
 	}
-	public String getSpring() {
+	public int getSpring() {
 		return spring;
 	}
-	public void setSpring(String spring) {
+	public void setSpring(int spring) {
 		this.spring = spring;
 	}
-	public String getRestful() {
+	public int getRestful() {
 		return restful;
 	}
-	public void setRestful(String restful) {
+	public void setRestful(int restful) {
 		this.restful = restful;
 	}
-	public String getHibernate() {
+	public int getHibernate() {
 		return hibernate;
 	}
-	public void setHibernate(String hibernate) {
+	public void setHibernate(int hibernate) {
 		this.hibernate = hibernate;
 	}
-	public String getGit() {
+	public int getGit() {
 		return git;
 	}
-	public void setGit(String git) {
+	public void setGit(int git) {
 		this.git = git;
 	}
-	public String getDocker() {
+	public int getDocker() {
 		return docker;
 	}
-	public void setDocker(String docker) {
+	public void setDocker(int docker) {
 		this.docker = docker;
 	}
-	public String getJenkins() {
+	public int getJenkins() {
 		return jenkins;
 	}
-	public void setJenkins(String jenkins) {
+	public void setJenkins(int jenkins) {
 		this.jenkins = jenkins;
 	}
-	public String getAws() {
+	public int getAws() {
 		return aws;
 	}
-	public void setAws(String aws) {
+	public void setAws(int aws) {
 		this.aws = aws;
 	}
 	

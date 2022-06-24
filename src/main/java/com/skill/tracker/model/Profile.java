@@ -1,9 +1,14 @@
 package com.skill.tracker.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Profile {
+public class Profile implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String associateId;
@@ -15,6 +20,9 @@ public class Profile {
 
 	//non-technical skills
 	private NonTechnicalSkill nonTechnicalSkills;
+	
+	private TechnicalSkills[] technicalSkill;
+	private NonTechnicalSkills[] nonTechnicalSkill;
 	
 	private Date createdTimestamp;
 	private Date updatedTimestamp;
@@ -84,6 +92,22 @@ public class Profile {
 
 	public void setUpdatedTimestamp(Date updatedTimestamp) {
 		this.updatedTimestamp = updatedTimestamp;
+	}
+
+	public TechnicalSkills[] getTechnicalSkill() {
+		return technicalSkill;
+	}
+
+	public void setTechnicalSkill(TechnicalSkills[] technicalSkill) {
+		this.technicalSkill = technicalSkill;
+	}
+
+	public NonTechnicalSkills[] getNonTechnicalSkill() {
+		return nonTechnicalSkill;
+	}
+
+	public void setNonTechnicalSkill(NonTechnicalSkills[] nonTechnicalSkill) {
+		this.nonTechnicalSkill = nonTechnicalSkill;
 	}
 
 	@Override
