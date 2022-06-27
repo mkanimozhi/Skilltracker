@@ -1,2 +1,5 @@
-http://localhost:8081/skill-tracker/api/v1/engineer/add-profile
-http://localhost:8081/skill-tracker/api/v1/engineer/get-profile
+http://localhost:8081/skill-tracker/api/v1/engineer/add-profile - POST
+http://localhost:8081/skill-tracker/api/v1/engineer/edit-profile - EDIT
+http://localhost:8081/skill-tracker/api/v1/engineer/get-profile - GET
+http://localhost:8081/skill-tracker/api/v1/engineer/get-profile-detail?id=1 - GET
+http://localhost:8081/skill-tracker/api/v1/engineer/find-profile - POST

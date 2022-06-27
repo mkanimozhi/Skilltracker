@@ -1,25 +1,25 @@
 {
-	"name": "sharma",
+	"name": "kanimozhi",
 	"associateId": "CTS002",
 	"mobile": "9488896950",
-	"email": "sharma.M3@cognizant.com",
+	"email": "kanimozhi.M3@cognizant.com",
 	"technicalSkills": 
 	{
 		"html_Css_Javascript": "1",
-	"angular": "",
-	"react": "",
-		"spring": "",
-	"restful": "",
-	"hibernate": "",
-		"git": "",
-	"docker": "",
-	"jenkins": "",
-		"aws": ""
+	"angular": "12",
+	"react": "13",
+		"spring": "14",
+	"restful": "11",
+	"hibernate": "20",
+		"git": "12",
+	"docker": "19",
+	"jenkins": "18",
+		"aws": "1"
 	},
 	"nonTechnicalSkills": {
-	"spoken": "",
-	"communication": "",
-	"aptitude": ""	
+	"spoken": "7",
+	"communication": "8",
+	"aptitude": "9"	
 	}
 	
 }
