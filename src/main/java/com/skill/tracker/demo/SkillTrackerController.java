@@ -24,8 +24,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,19 +72,20 @@ public class SkillTrackerController  {
 		kafkaConsumerFind = ConsumerCreator.createConsumerReqListFind();
 	}
 	
+	
 	@Bean 
 	@Order(0)
 	SecurityFilterChain resources(HttpSecurity http) throws Exception {
 	    http
 //	        .requestMatchers((matchers) -> matchers.antMatchers("/engineer/**"))
-	        .requestMatchers((matchers) -> matchers.antMatchers("/**"))
+	        .requestMatchers((matchers) -> matchers.antMatchers("/engineer/**"))
 	        .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
 	        .requestCache().disable()
 	        .securityContext().disable()
 	        .sessionManagement().disable();
 
 	    return http.build();
-	}
+	} 
 	
 	@GetMapping(path="/api/v1/engineer/get-profile")
 	public List<Profile> getProfiles() {
@@ -160,10 +161,6 @@ public class SkillTrackerController  {
 		System.out.println("Inside editProfiles... "+profile);
 		ProfileResponse response = new ProfileResponse();
 		if(validateProfileRequest(profile, response)) {
-			Optional<Profile> profileFound = profileRepo.findById(profile.getId());
-			if(profileFound.isPresent()) {
-				Profile profile2 = profileFound.get();
-			}
 			profileRepo.save(profile);
 			List<Profile> dbProfiles = getProfiles();
 			Profiles profiles = new Profiles();
